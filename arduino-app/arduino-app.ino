@@ -92,7 +92,7 @@ void loop()
 {
   // buttons
   getButtonsState();
-  
+
   // RFID
   getRFIDModuleValue();
 
@@ -124,23 +124,23 @@ void getButtonsState()
   int button4 = digitalRead(PIN_BUTTON_4);
 
   // boutton 1
-  if (button1 == HIGH) { 
-    Serial.println("[ BUTTON ]:[ B1 ]");
+  if (button1 == HIGH) {
+    Serial.println("BUTTON --> B1");
   }
-  
+
   // boutton 2
-  if (button2 == HIGH) { 
-    Serial.println("[ BUTTON ]:[ B2 ]");
+  if (button2 == HIGH) {
+    Serial.println("BUTTON --> B2");
   }
 
   // boutton 3
-  if (button3 == HIGH) { 
-    Serial.println("[ BUTTON ]:[ B3 ]");
+  if (button3 == HIGH) {
+    Serial.println("BUTTON --> B3");
   }
 
   // boutton 4
-  if (button4 == HIGH) { 
-    Serial.println("[ BUTTON ]:[ B4 ]");
+  if (button4 == HIGH) {
+    Serial.println("BUTTON --> B4");
   }
 }
 
@@ -158,7 +158,7 @@ void getButtonsState()
 void getPotentiometerValue()
 {
   int value;
-  
+
   // récupére la valeur du potentiometre
   value = analogRead(PIN_POTENTIOMETER);
 
@@ -168,9 +168,8 @@ void getPotentiometerValue()
   // retourner la valeur du potentiomètre
   // pour la traiter avec le RaspberryPI
   if (potentiometer < value -5 || potentiometer > value + 5) {
-    Serial.print("[ POTENTIOMETER ]:[ ");
-    Serial.print(value);
-    Serial.println(" ]");
+    Serial.print("POTENTIOMETER --> ");
+    Serial.println(value);
     potentiometer = value;
   }
 }
@@ -196,9 +195,8 @@ void getRFIDModuleValue()
   tag=tag.substring(1,13);
 
   while(tag.length() > 0) {
-    Serial.print("[ RFID ]:[ ");
-    Serial.print(tag);
-    Serial.println(" ]");
+    Serial.print("RFID --> ");
+    Serial.println(tag);
     tag = "";
   }
   delay(500);
@@ -212,7 +210,7 @@ void getRFIDModuleValue()
  */
 
 /**
- * Retourner la valeur de l'accélèromètre afin 
+ * Retourner la valeur de l'accélèromètre afin
  * qu'elle puisse être traitée par le RaspberryPI
  */
  void getAccelerometreValue()
@@ -224,13 +222,12 @@ void getRFIDModuleValue()
 
    // retourner la valeur de l'accélèromètre
    // pour la traiter avec le RaspberryPI
-   Serial.print("[ ACCELEROMETER ]:[ ");
+   Serial.print("ACCELEROMETER --> ");
    Serial.print(x);
    Serial.print(",");
    Serial.print(y);
    Serial.print(",");
-   Serial.print(z);
-   Serial.println(" ]");
+   Serial.println(z);
  }
 
 /**
@@ -445,4 +442,3 @@ void animationColorLED(int colors[], int params[])
     delay(params[0]);
   }
 }
-
