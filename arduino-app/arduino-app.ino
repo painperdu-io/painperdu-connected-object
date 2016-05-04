@@ -44,6 +44,7 @@ int potentiometer = 0;
 int x = 0;
 int y = 0;
 int z = 0;
+int ledAnimID = 0;
 
 
 /**
@@ -70,18 +71,6 @@ void setup()
 
   // éteindre la LED
   setRGBColor(0, 0, 0);
-
-  // DANS LE LOOP
-  // animationColorLED("blue", "red", 10);
-  // animationColorLED("red", "blue", 10);
-  // animationColorLED("blue", "green", 10);
-  // animationColorLED("green", "red", 10);
-  // animationColorLED("red", "blue", 10);
-
-  // int ledColor[] = {0, 255, 0};
-  int ledParams[] = {1000, 1000};
-  int timeParams[] = {10};
-  //playLEDAnimation(3, "color", FROM_RGB_BLUE_TO_RGB_GREEN, timeParams);
 }
 
 
@@ -101,13 +90,10 @@ void loop()
 
   // accelerometre
   getAccelerometreValue();
+
+  // events
+  ledEventListener();
 }
-
-
-/**
- *
- * TODO : STOPPER LA LED EVENT
- */
 
 
 /**
@@ -235,6 +221,34 @@ void getRFIDModuleValue()
  * -- LED
  * -----------------------------------------------------------------------------
  */
+
+/**
+ * Récupérer et analyser les évenements pour la LED 
+ * envoyés par le Raspberry
+ */
+void ledEventListener()
+{
+  if (Serial.available())  {
+    ledAnimID = Serial.read() - '0';
+
+    // définitions des paramètres des animations
+    int anim1Params[] = {5};
+    int anim2Params[] = {300, 75};
+
+    // jouer l'animation
+    switch (ledAnimID) {
+      case 1:
+        playLEDAnimation(1, "color", FROM_RGB_BLUE_TO_RGB_GREEN, anim1Params);
+        setRGBColor(0, 0, 0);
+        break;
+        
+      case 2: 
+        playLEDAnimation(3, "blink", RGB_RED, anim2Params);
+        break;
+    }
+  }
+}
+
 
 /**
  * Jouer une animation sur la LED
