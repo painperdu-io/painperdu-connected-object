@@ -234,6 +234,8 @@ void ledEventListener()
     // définitions des paramètres des animations
     int anim1Params[] = {5};
     int anim2Params[] = {300, 75};
+    int anim3Params[] = {300, 75};
+    int anim4Params[] = {150, 0};
 
     // jouer l'animation
     switch (ledAnimID) {
@@ -243,7 +245,15 @@ void ledEventListener()
         break;
         
       case 2: 
-        playLEDAnimation(3, "blink", RGB_RED, anim2Params);
+        playLEDAnimation(3, "blink", RGB_GREEN, anim2Params);
+        break;
+
+      case 3: 
+        playLEDAnimation(3, "blink", RGB_RED, anim3Params);
+        break;
+
+      case 4: 
+        playLEDAnimation(1, "blink", RGB_BLUE, anim4Params);
         break;
     }
   }
