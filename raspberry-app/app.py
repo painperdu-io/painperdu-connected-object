@@ -69,15 +69,15 @@ def eventListener(socketIO):
 
 
 # Démarrer l'objet connecté
-def startPainperduConnectedObject():
+def startPainperduConnectedObject(server, port):
     print "\nPainperdu connected object \033[92m[STARTED]\033[0m\n"
 
     # connexion au serveur socket.io
-    socketIO = SocketIO('localhost', 1337)
-    socketIO.on('startPainperduConnectedObject', eventListener(socketIO))
+    socketIO = SocketIO(server, port)
+    socketIO.on("startPainperduConnectedObject", eventListener(socketIO))
     socketIO.wait()
 
 
 # Éxecuter l'application
 if __name__ == '__main__':
-    startPainperduConnectedObject()
+    startPainperduConnectedObject("localhost", 1337)
