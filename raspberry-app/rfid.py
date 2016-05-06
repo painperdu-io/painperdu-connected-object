@@ -5,9 +5,9 @@ import led as LED
 
 # Définir les actions lorsque une
 # puce RFID est détectée
-def listener(value):
+def listener(value, socketIO):
     LED.playAnimation(1)
-    print "EMMIT --> RFID %s" % value
+    socketIO.emit("rfid", value)
 
 
 # Main

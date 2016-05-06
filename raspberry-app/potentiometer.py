@@ -5,10 +5,10 @@ import led as LED
 
 # Définir une quantité lorsque l'utilisateur
 # actionne le potentiomètre
-def listener(value):
+def listener(value, socketIO):
     LED.playAnimation(4)
     value = int(value) / 100 + 1
-    print "EMMIT --> ID OBJECT POTENTIOMETER %i" % value
+    socketIO.emit("potentiometer", value)
 
 
 # Main
