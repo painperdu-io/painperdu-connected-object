@@ -21,6 +21,10 @@
 #include <SoftwareSerial.h>
 SoftwareSerial RFID = SoftwareSerial(2, 3);
 
+// Accéléromètre
+#include <AcceleroMMA7361.h>
+AcceleroMMA7361 accelero;
+
 // definir les tableaux de couleurs RGB
 int RGB_RED[]     = {255, 0, 0};
 int RGB_GREEN[]   = {0, 255, 0};
@@ -52,11 +56,19 @@ int ledAnimID = 0;
  */
 void setup()
 {
+  // initialiser l'arduino
   Serial.begin(9600);
   Serial.println("Serial Ready");
 
+  // initialiser le RFID
   RFID.begin(9600);
   Serial.println("RFID Ready");
+
+  // initialiser l'accéléromètre
+  accelero.begin(3, 12, 1, 13, A3, A4, A5);
+  accelero.setARefVoltage(5);
+  accelero.setSensitivity(LOW);
+  accelero.calibrate();
 
   // définir les sorties de la LED
   pinMode(PIN_LED_RED, OUTPUT);
@@ -201,20 +213,16 @@ void getRFIDModuleValue()
  */
  void getAccelerometreValue()
  {
-   // récupérer les valeurs de l'accélèromètre
-   x = analogRead(PIN_ACCELEROMETER_X);
-   y = analogRead(PIN_ACCELEROMETER_Y);
-   z = analogRead(PIN_ACCELEROMETER_Z);
-
    // retourner la valeur de l'accélèromètre
    // pour la traiter avec le RaspberryPI
    Serial.print("ACCELEROMETER --> ");
-   Serial.print(x);
+   Serial.print(accelero.getXAccel());
    Serial.print(",");
-   Serial.print(y);
+   Serial.print(accelero.getYAccel());
    Serial.print(",");
-   Serial.println(z);
+   Serial.println(accelero.getZAccel());
  }
+
 
 /**
  * -----------------------------------------------------------------------------
@@ -223,7 +231,7 @@ void getRFIDModuleValue()
  */
 
 /**
- * Récupérer et analyser les évenements pour la LED 
+ * Récupérer et analyser les évenements pour la LED
  * envoyés par le Raspberry
  */
 void ledEventListener()
@@ -243,16 +251,16 @@ void ledEventListener()
         playLEDAnimation(1, "color", FROM_RGB_BLUE_TO_RGB_GREEN, anim1Params);
         setRGBColor(0, 0, 0);
         break;
-        
-      case 2: 
+
+      case 2:
         playLEDAnimation(3, "blink", RGB_GREEN, anim2Params);
         break;
 
-      case 3: 
+      case 3:
         playLEDAnimation(3, "blink", RGB_RED, anim3Params);
         break;
 
-      case 4: 
+      case 4:
         playLEDAnimation(1, "blink", RGB_BLUE, anim4Params);
         break;
     }
