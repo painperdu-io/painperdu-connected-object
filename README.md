@@ -3,7 +3,8 @@
 ### arduino-app
 
 Branchement à effectuer sur l'Arduino Uno:
-  - *Accéléromètre*: analogique port --> x: 3, y: 4, z: 5
+  - *Accéléromètre*: analogique --> x: 3, y: 4, z: 5
+  - *Accéléromètre*: numérique --> Sleep (SL): 3, Self test (ST): 12, Zero G (0G): 8, G Select (GS): 13
   - *Bouton 1*: numérique --> 4
   - *Bouton 2*: numérique --> 5
   - *Bouton 3*: numérique --> 6
