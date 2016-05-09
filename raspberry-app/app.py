@@ -59,7 +59,6 @@ def parseEvent(event):
 # Écouter tout les evenements de notre objet
 # qui sont envoyés à travers le raspberry
 def eventListener():
-    print this.socketIO
     while 1:
         try:
             event = this.ser.readline()
@@ -79,11 +78,15 @@ def runObject(objectId):
         eventListener()
 
 
+# Main
 def main(server, port):
     print "\nPainperdu connected object \033[92m[STARTED]\033[0m\n"
 
     # générer un id unique pour l'objet
     this.objectId = str(uuid.uuid4())
+
+    # initialiser l'accéléromètre
+    ACCELEROMETER.init()
 
     # connexion au serveur socket.io
     this.socketIO = SocketIO(server, port)
