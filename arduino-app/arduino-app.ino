@@ -65,7 +65,7 @@ void setup()
   Serial.println("RFID Ready");
 
   // initialiser l'accéléromètre
-  accelero.begin(3, 12, 1, 13, A3, A4, A5);
+  accelero.begin(3, 12, 8, 13, A3, A4, A5);
   accelero.setARefVoltage(5);
   accelero.setSensitivity(LOW);
   accelero.calibrate();
