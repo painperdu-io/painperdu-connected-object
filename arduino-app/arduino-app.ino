@@ -186,7 +186,7 @@ void getPotentiometerValue()
 void getRFIDModuleValue()
 {
   char c;
-  while(RFID.available() > 0){
+  while(RFID.available() > 0) {
     c=RFID.read();
     tag += c;
   }
@@ -197,7 +197,7 @@ void getRFIDModuleValue()
     Serial.println(tag);
     tag = "";
   }
-  delay(500);
+  delay(100);
 }
 
 
@@ -240,28 +240,47 @@ void ledEventListener()
     ledAnimID = Serial.read() - '0';
 
     // définitions des paramètres des animations
-    int anim1Params[] = {5};
-    int anim2Params[] = {300, 75};
-    int anim3Params[] = {300, 75};
-    int anim4Params[] = {150, 0};
+    int anim1Params[] = {600, 75};
+    int anim2Params[] = {150, 50};
+    int anim3Params[] = {1, 50};
+    int anim4Params[] = {6, 0};
+    int anim5Params[] = {1};
+    //int anim2Params[] = {5};
+    //int anim3Params[] = {600, 75};
 
     // jouer l'animation
     switch (ledAnimID) {
+
+      // animation ajout produit
       case 1:
-        playLEDAnimation(1, "color", FROM_RGB_BLUE_TO_RGB_GREEN, anim1Params);
+        playLEDAnimation(1, "blink", RGB_WHITE, anim1Params);
         setRGBColor(0, 0, 0);
         break;
 
+      // validation
       case 2:
-        playLEDAnimation(3, "blink", RGB_GREEN, anim2Params);
+        playLEDAnimation(2, "blink", RGB_GREEN, anim2Params);
+        setRGBColor(0, 0, 0);
         break;
 
+      // annulation
       case 3:
-        playLEDAnimation(3, "blink", RGB_RED, anim3Params);
+        playLEDAnimation(1, "fade", RGB_RED, anim3Params);
+        setRGBColor(0, 0, 0);
         break;
 
+      // recherche
       case 4:
-        playLEDAnimation(1, "blink", RGB_BLUE, anim4Params);
+        playLEDAnimation(3, "fade", RGB_BLUE, anim4Params);
+        setRGBColor(0, 0, 0);
+        break;
+
+      // alliance validé
+      case 5: 
+        playLEDAnimation(1, "color", FROM_RGB_RED_TO_RGB_GREEN, anim5Params);
+        playLEDAnimation(1, "color", FROM_RGB_GREEN_TO_RGB_BLUE, anim5Params);
+        playLEDAnimation(1, "color", FROM_RGB_BLUE_TO_RGB_RED, anim5Params);
+        setRGBColor(0, 0, 0);
         break;
     }
   }
