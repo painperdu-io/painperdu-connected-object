@@ -2,11 +2,12 @@
 # -*- coding: UTF-8 -*-
 
 import led as LED
+import sound as SOUND
 
 # Définir une quantité lorsque l'utilisateur
 # actionne le potentiomètre
 def listener(value, socketIO):
-    LED.playAnimation(4)
+    SOUND.play("quantity")
     value = int(value) / 100 + 1
     socketIO.emit("potentiometer", value)
 
