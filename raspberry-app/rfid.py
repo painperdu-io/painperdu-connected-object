@@ -1,19 +1,31 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
+import sys
+from time import time
+
 import led as LED
 import sound as SOUND
+
+this = sys.modules[__name__]
+
+def init():
+    this.oldtimeRFID = int(time()) - 5
 
 # Définir les actions lorsque une
 # puce RFID est détectée
 def listener(value, socketIO):
 
-    # lire le son RFID
-    SOUND.play("rfid")
-    LED.playAnimation(1)
+    if (this.oldtimeRFID + 5 < int(time())):
+        this.oldtimeRFID = int(time())
+        # lire le son RFID
+        SOUND.play("rfid")
+        LED.playAnimation(1)
 
-    # envoyer les valeurs au serveur
-    socketIO.emit("rfid", value)
+        # envoyer les valeurs au serveur
+        socketIO.emit("rfid", value)
+    else:
+        print "EN ATTENTE RFID"
 
 
 # Main

@@ -197,7 +197,7 @@ void getRFIDModuleValue()
     Serial.println(tag);
     tag = "";
   }
-  delay(100);
+  delay(300);
 }
 
 
@@ -245,8 +245,6 @@ void ledEventListener()
     int anim3Params[] = {1, 50};
     int anim4Params[] = {6, 0};
     int anim5Params[] = {1};
-    //int anim2Params[] = {5};
-    //int anim3Params[] = {600, 75};
 
     // jouer l'animation
     switch (ledAnimID) {

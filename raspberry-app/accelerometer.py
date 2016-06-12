@@ -12,7 +12,7 @@ def init():
     this.x = 0
     this.y = 0
     this.z = 0
-    this.oldtime = int(time()) - 60
+    this.oldtimeACCELEROMETER = int(time()) - 60
 
 
 # Définir si la porte du frigo
@@ -26,8 +26,8 @@ def listener(value, socketIO):
     if (math.fabs(x - this.x) > 10 and
         math.fabs(y - this.y) > 10 and
         math.fabs(z - this.z) > 10 and
-        this.oldtime + 60 < int(time())):
-        this.oldtime = int(time())
+        this.oldtimeACCELEROMETER + 60 < int(time())):
+        this.oldtimeACCELEROMETER = int(time())
         socketIO.emit("accelerometer")
 
     # enregistrer les valeurs x,y,z
