@@ -244,7 +244,7 @@ void ledEventListener()
     int anim2Params[] = {150, 50};
     int anim3Params[] = {1, 50};
     int anim4Params[] = {6, 0};
-    int anim5Params[] = {1};
+    int anim5Params[] = {3};
 
     // jouer l'animation
     switch (ledAnimID) {
@@ -269,15 +269,13 @@ void ledEventListener()
 
       // recherche
       case 4:
-        playLEDAnimation(3, "fade", RGB_BLUE, anim4Params);
+        playLEDAnimation(2, "fade", RGB_BLUE, anim4Params);
         setRGBColor(0, 0, 0);
         break;
 
       // alliance validé
       case 5: 
-        playLEDAnimation(1, "color", FROM_RGB_RED_TO_RGB_GREEN, anim5Params);
-        playLEDAnimation(1, "color", FROM_RGB_GREEN_TO_RGB_BLUE, anim5Params);
-        playLEDAnimation(1, "color", FROM_RGB_BLUE_TO_RGB_RED, anim5Params);
+        playLEDAnimation(1, "color", FROM_RGB_BLUE_TO_RGB_GREEN, anim5Params);
         setRGBColor(0, 0, 0);
         break;
     }

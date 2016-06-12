@@ -1,15 +1,29 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
+import sys
 import led as LED
 import sound as SOUND
+
+this = sys.modules[__name__]
+
+def init():
+    this.oldPOTENTIOMETER = 0
+
+# Arrondire les valeurs en dizaine
+def roundup(x):
+    return int(math.ceil(x / 10.0)) * 10
 
 # Définir une quantité lorsque l'utilisateur
 # actionne le potentiomètre
 def listener(value, socketIO):
-    SOUND.play("quantity")
     value = int(value) / 100 + 1
-    socketIO.emit("potentiometer", value)
+
+    if (value != this.oldPOTENTIOMETER):
+        SOUND.play("quantity")
+        socketIO.emit("potentiometer", value)
+
+    this.oldPOTENTIOMETER = value
 
 
 # Main

@@ -88,8 +88,11 @@ def main(server, port):
     # initialiser l'accéléromètre
     ACCELEROMETER.init()
 
-    # initialiser le RFID
+    # initialiser le rfid
     RFID.init()
+
+    # initialiser le potentiomètre
+    POTENTIOMETER.init()
 
     # connexion au serveur socket.io
     this.socketIO = SocketIO(server, port)

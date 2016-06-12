@@ -22,11 +22,13 @@ def listener(value, socketIO):
     # bouton 3 (recherche)
     if (value == "B3"):
         LED.playAnimation(4)
+        SOUND.play("search")
         socketIO.emit("button", 3)
 
     # bouton 4 (alliance validée)
     if (value == "B4"):
         LED.playAnimation(5)
+        SOUND.play("alliance")
         socketIO.emit("button", 4)
 
 
